@@ -1,0 +1,14 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Full name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="player in players | orderBy:'name'">
+      <td><a ng-href="#/players/{{player.id}}">{{player.name}}</a></td>
+      <td>{{player.fullName}}</td>
+    </tr>
+  </tbody>
+</table>

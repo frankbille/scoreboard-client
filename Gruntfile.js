@@ -252,7 +252,7 @@ module.exports = function (grunt) {
         },
         cwd: '.tmp',
         src: 'views/*.html',
-        dest: 'templates.js'
+        dest: '.tmp/templates.js'
       }
     },
 

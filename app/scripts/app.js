@@ -5,14 +5,17 @@ angular.module('scoreBoardApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute'
-])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+]).config(function($routeProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
+    })
+    .when('/players', {
+      templateUrl: 'views/playerlist.html',
+      controller: 'PlayerListCtrl'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+});
