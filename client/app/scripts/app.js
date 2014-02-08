@@ -10,12 +10,12 @@ angular.module('scoreBoardApp', [
     .when('/', {
       templateUrl: 'views/main.html',
       controller: 'MainCtrl'
-    })
-    .when('/players', {
+    });
+  $routeProvider.when('/players', {
       templateUrl: 'views/playerlist.html',
       controller: 'PlayerListCtrl'
-    })
-    .otherwise({
+    });
+  $routeProvider.otherwise({
       redirectTo: '/'
     });
 });

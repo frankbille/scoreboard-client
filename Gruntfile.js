@@ -21,8 +21,9 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: {
       // configurable paths
-      app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      app: 'client/app',
+      test: 'client/test',
+      dist: 'server/dist'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -79,7 +80,7 @@ module.exports = function (grunt) {
           port: 9001,
           base: [
             '.tmp',
-            'test',
+            '<%= yeoman.test %>',
             '<%= yeoman.app %>'
           ]
         }
@@ -103,9 +104,9 @@ module.exports = function (grunt) {
       ],
       test: {
         options: {
-          jshintrc: 'test/.jshintrc'
+          jshintrc: '<%= yeoman.test %>/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['<%= yeoman.test %>/spec/{,*/}*.js']
       }
     },
 
@@ -142,7 +143,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     'bower-install': {
       app: {
-        html: '<%= yeoman.app %>/index.html',
+        src: '<%= yeoman.app %>/index.html',
         ignorePath: '<%= yeoman.app %>/'
       }
     },
@@ -273,10 +274,8 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '.htaccess',
             '*.html',
             'bower_components/**/*',
-            'images/{,*/}*.{webp}',
             'fonts/*'
           ]
         }, {
@@ -314,6 +313,22 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
+      }
+    },
+
+    gae: {
+      run: {
+        action: 'run',
+        options: {
+          path: 'server'
+        }
+      },
+      'update-dev': {
+        action: 'update',
+        options: {
+          path: 'server',
+          version: 'dev'
+        }
       }
     }
   });
@@ -359,6 +374,16 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin:distpages'
+  ]);
+
+  grunt.registerTask('gaerun', [
+    'build',
+    'gae:run'
+  ]);
+
+  grunt.registerTask('gaeupdatedev', [
+    'build',
+    'gae:update-dev'
   ]);
 
   grunt.registerTask('default', [
