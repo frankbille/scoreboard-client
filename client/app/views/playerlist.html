@@ -11,4 +11,19 @@
       <td>{{player.fullName}}</td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">
+        <div class="pull-left">
+          <button class="btn btn-default" ng-show="pagination.firstPage" ng-click="goto(pagination.firstPage)"><span class="fa fa-angle-double-left fa-lg"></span> First</button>
+          <button class="btn btn-default" ng-show="pagination.prevPage" ng-click="goto(pagination.prevPage)"><span class="fa fa-angle-left fa-lg"></span> Previous</button>
+        </div>
+
+        <div class="pull-right">
+          <button class="btn btn-default" ng-show="pagination.nextPage" ng-click="goto(pagination.nextPage)">Next <span class="fa fa-angle-right fa-lg"></span></button>
+          <button class="btn btn-default" ng-show="pagination.lastPage" ng-click="goto(pagination.lastPage)">Last <span class="fa fa-angle-double-right fa-lg"></span></button>
+        </div>
+      </td>
+    </tr>
+  </tfoot>
 </table>

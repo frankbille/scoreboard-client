@@ -1,0 +1,56 @@
+application: scoreboardapplication
+version: dev
+runtime: go
+api_version: go1
+
+handlers:
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
+  mime_type: text/html; charset=utf-8
+
+- url: /views
+  static_dir: dist/views
+  mime_type: text/html; charset=utf-8
+
+- url: /robots.txt
+  static_files: dist/robots.txt
+  upload: dist/robots.txt
+  mime_type: text/plain
+
+- url: /bower_components
+  static_dir: dist/bower_components
+
+- url: /styles/(.*\.css)
+  static_files: dist/styles/\1
+  upload: dist/styles/(.*\.css)
+  mime_type: text/css; charset=utf-8
+
+- url: /scripts/(.*\.js)
+  static_files: dist/scripts/\1
+  upload: dist/scripts/(.*\.js)
+  mime_type: text/javascript; charset=utf-8
+
+- url: /fonts/(.*\.woff)
+  static_files: dist/fonts/\1
+  upload: dist/fonts/(.*\.woff)
+  mime_type: application/font-woff
+
+- url: /fonts/(.*\.eot)
+  static_files: dist/fonts/\1
+  upload: dist/fonts/(.*\.eot)
+  mime_type: application/vnd.ms-fontobject
+
+- url: /fonts/(.*\.svg)
+  static_files: dist/fonts/\1
+  upload: dist/fonts/(.*\.svg)
+  mime_type: image/svg+xml
+
+- url: /fonts/(.*\.ttf)
+  static_files: dist/fonts/\1
+  upload: dist/fonts/(.*\.ttf)
+  mime_type: font/ttf
+
+- url: /api/.*
+  script: _go_app
+

@@ -29,66 +29,11 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
-        options: {
-          livereload: true
-        }
-      },
-      jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
-      },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
-      },
-      gruntfile: {
-        files: ['Gruntfile.js']
-      },
-      livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ]
-      }
-    },
-
-    // The actual grunt server settings
-    connect: {
-      options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
-        livereload: 35729
-      },
-      livereload: {
-        options: {
-          open: true,
-          base: [
-            '.tmp',
-            '<%= yeoman.app %>'
-          ]
-        }
-      },
-      test: {
-        options: {
-          port: 9001,
-          base: [
-            '.tmp',
-            '<%= yeoman.test %>',
-            '<%= yeoman.app %>'
-          ]
-        }
-      },
-      dist: {
-        options: {
-          base: '<%= yeoman.dist %>'
-        }
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/{,*/}*.html'
+        ],
+        tasks: ['newer:copy:devrun']
       }
     },
 
@@ -290,6 +235,12 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      devrun: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/',
+        src: '**',
+        dest: '<%= yeoman.dist %>/'
       }
     },
 
@@ -317,7 +268,14 @@ module.exports = function (grunt) {
     },
 
     gae: {
-      run: {
+      devrun: {
+        action: 'run',
+        options: {
+          path: 'server/app_dev.yaml',
+          async: true
+        }
+      },
+      distrun: {
         action: 'run',
         options: {
           path: 'server'
@@ -333,21 +291,6 @@ module.exports = function (grunt) {
     }
   });
 
-
-  grunt.registerTask('serve', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
-
-    grunt.task.run([
-      'clean:server',
-      'bower-install',
-      'concurrent:server',
-      'autoprefixer',
-      'connect:livereload',
-      'watch'
-    ]);
-  });
 
   grunt.registerTask('test', [
     'clean:server',
@@ -376,9 +319,17 @@ module.exports = function (grunt) {
     'htmlmin:distpages'
   ]);
 
-  grunt.registerTask('gaerun', [
+  grunt.registerTask('gaedevrun', [
+    'clean:dist',
+    'bower-install',
+    'copy:devrun',
+    'gae:devrun',
+    'watch'
+  ]);
+
+  grunt.registerTask('gaedistrun', [
     'build',
-    'gae:run'
+    'gae:distrun'
   ]);
 
   grunt.registerTask('gaeupdatedev', [
