@@ -68,6 +68,10 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
+  .footer footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
