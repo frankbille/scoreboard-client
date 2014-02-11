@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('scoreBoardApp').controller('PlayerListCtrl', function($scope, PlayerResource) {
-  $scope.$watch('page', function(newValue, oldValue) {
+  $scope.$watch('page', function(newValue) {
     var playerList = PlayerResource.query({
-      page: $scope.page
+      page: newValue
     }, function() {
       $scope.players = playerList.players;
       $scope.pagination = playerList.pagination;
