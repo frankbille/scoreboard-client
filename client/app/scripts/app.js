@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('scoreBoardApp', [
-  'ngCookies',
   'ngResource',
-  'ngSanitize',
   'ngRoute'
 ]).config(function($routeProvider) {
   $routeProvider
