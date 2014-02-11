@@ -176,6 +176,11 @@ module.exports = function (grunt) {
         }]
       }
     },
+    cssmin: {
+      options: {
+        report: 'gzip'
+      }
+    },
 
     // Allow the use of non-minsafe AngularJS files. Automatically makes it
     // minsafe compatible so Uglify does not destroy the ng references
@@ -257,6 +262,12 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
+    },
+
+    uglify: {
+      options: {
+        report: 'gzip'
+      }
     },
 
     // Test settings
