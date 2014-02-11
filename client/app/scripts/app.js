@@ -2,7 +2,9 @@
 
 angular.module('scoreBoardApp', [
   'ngResource',
-  'ngRoute'
+  'ngRoute',
+  'ui.gravatar',
+  'tagged.directives.infiniteScroll'
 ]).config(function($routeProvider) {
   $routeProvider
     .when('/', {
@@ -17,3 +19,14 @@ angular.module('scoreBoardApp', [
       redirectTo: '/'
     });
 });
+
+angular.module('ui.gravatar').config([
+  'gravatarServiceProvider', function(gravatarServiceProvider) {
+    gravatarServiceProvider.defaults = {
+      "default": 'identicon'  // Mystery man as default for missing avatars
+    };
+
+    // Use https endpoint
+    gravatarServiceProvider.secure = true;
+  }
+]);

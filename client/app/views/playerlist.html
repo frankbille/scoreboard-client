@@ -1,29 +1,10 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Full name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="player in players | orderBy:'name'">
-      <td><a ng-href="#/players/{{player.id}}">{{player.name}}</a></td>
-      <td>{{player.fullName}}</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="2">
-        <div class="pull-left">
-          <button class="btn btn-default" ng-show="pagination.firstPage" ng-click="goto(pagination.firstPage)"><span class="fa fa-angle-double-left fa-lg"></span> First</button>
-          <button class="btn btn-default" ng-show="pagination.prevPage" ng-click="goto(pagination.prevPage)"><span class="fa fa-angle-left fa-lg"></span> Previous</button>
-        </div>
-
-        <div class="pull-right">
-          <button class="btn btn-default" ng-show="pagination.nextPage" ng-click="goto(pagination.nextPage)">Next <span class="fa fa-angle-right fa-lg"></span></button>
-          <button class="btn btn-default" ng-show="pagination.lastPage" ng-click="goto(pagination.lastPage)">Last <span class="fa fa-angle-double-right fa-lg"></span></button>
-        </div>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+<div tagged-infinite-scroll="loadNextPage()" tagged-infinite-scroll-disabled="loading || disabled" tagged-infinite-scroll-distance="500">
+  <div ng-repeat="player in players | orderBy:'name'" class="media">
+    <a class="pull-left" ng-href="#/players/{{player.id}}"><img class="media-object img-thumbnail" width="40" gravatar-src="'{{player.email}}'" gravatar-size="40"></a>
+    <div class="media-body">
+      <h4 class="media-heading"><a ng-href="#/players/{{player.id}}">{{player.fullName || player.name}} <small>{{player.id}}</small></a></h4>
+      Name: {{player.name}}<span ng-show="player.email"> - Email: {{player.email}}</span><span ng-show="player.group"> - Group: {{player.group}}</span>
+    </div>
+  </div>
+  <div ng-show="loading">Loading data...</div>
+</div>
