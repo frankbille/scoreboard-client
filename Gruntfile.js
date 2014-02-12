@@ -328,10 +328,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('travis', [
-    'clean',
-    'concurrent:test',
-    'autoprefixer',
-    'karma',
+    'test',
     'coveralls'
   ]);
 
