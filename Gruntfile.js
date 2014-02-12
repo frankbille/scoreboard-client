@@ -271,10 +271,31 @@ module.exports = function (grunt) {
     },
 
     // Test settings
+    coveralls: {
+      options: {
+        coverage_dir: 'coverage/'
+      }
+    },
+
     karma: {
+      options: {
+        configFile: 'karma.conf.js'
+      },
       unit: {
-        configFile: 'karma.conf.js',
         singleRun: true
+      },
+      travis: {
+        singleRun: true,
+        reporters: ['dots', 'coverage'],
+        browsers: ['PhantomJS'],
+        preprocessors: {
+          'client/app/scripts/*.js': 'coverage',
+          'client/app/scripts/**/*.js': 'coverage'
+        },
+        coverageReporter: {
+          type : 'lcov',
+          dir : 'coverage/'
+        }
       }
     },
 
@@ -302,12 +323,19 @@ module.exports = function (grunt) {
     }
   });
 
-
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'karma'
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('travis', [
+    'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'karma:travis',
+    'coveralls'
   ]);
 
   grunt.registerTask('build', [

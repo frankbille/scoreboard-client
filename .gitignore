@@ -5,3 +5,4 @@ server/dist
 client/app/bower_components
 .sublime-grunt.cache
 .grunt-gae-pid
+coverage

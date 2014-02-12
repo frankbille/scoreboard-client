@@ -23,7 +23,6 @@ module.exports = function(config) {
       'client/app/bower_components/tagged-infinite-scroll/taggedInfiniteScroll.js',
       'client/app/scripts/*.js',
       'client/app/scripts/**/*.js',
-      'client/test/mock/**/*.js',
       'client/test/spec/**/*.js'
     ],
 
@@ -51,6 +50,12 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['PhantomJS'],
+
+    plugins: [
+      'karma-jasmine',
+      'karma-phantomjs-launcher',
+      'karma-coverage'
+    ],
 
 
     // Continuous Integration mode

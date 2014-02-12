@@ -43,7 +43,8 @@
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "grunt-angular-templates": "~0.5.1",
     "grunt-karma-coveralls": "~2.3.0",
-    "grunt-gae": "~0.2.2"
+    "grunt-gae": "~0.2.2",
+    "karma-coverage": "~0.1.5"
   },
   "engines": {
     "node": ">=0.8.0"
