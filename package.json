@@ -1,6 +1,6 @@
 {
   "name": "ScoreBoard",
-  "version": "2.0.0",
+  "version": "2.0.0-alpha.1",
   "dependencies": {},
   "scripts": {
     "test": "grunt travis"
@@ -50,9 +50,6 @@
     "karma-coverage": "~0.1.5"
   },
   "engines": {
-    "node": ">=0.8.0"
-  },
-  "scripts": {
-    "test": "grunt test"
+    "node": ">=0.10.0"
   }
 }
