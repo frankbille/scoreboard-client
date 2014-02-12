@@ -6,17 +6,13 @@ angular.module('scoreBoardApp').controller('PlayerListCtrl', function($scope, Pl
   $scope.disabled = false;
   $scope.nextPage = 1;
 
-  $scope.$watch('page', function(newValue) {
-
-  });
-
   $scope.loadNextPage = function() {
     if ($scope.loading) return;
     $scope.loading = true;
 
-    var playerList = PlayerResource.query({
+    PlayerResource.query({
       page: $scope.nextPage
-    }, function() {
+    }, function(playerList) {
       for (var i = 0; i < playerList.players.length; i++) {
         $scope.players.push(playerList.players[i]);
       }

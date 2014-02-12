@@ -63,11 +63,11 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '!<%= yeoman.dist %>/.git*',
+            'coverage'
           ]
         }]
-      },
-      server: '.tmp'
+      }
     },
 
     // Add vendor prefixed styles
@@ -282,9 +282,6 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js'
       },
       unit: {
-        singleRun: true
-      },
-      travis: {
         singleRun: true,
         reporters: ['dots', 'coverage'],
         browsers: ['PhantomJS'],
@@ -324,22 +321,22 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-    'clean:server',
+    'clean',
     'concurrent:test',
     'autoprefixer',
-    'karma:unit'
+    'karma'
   ]);
 
   grunt.registerTask('travis', [
-    'clean:server',
+    'clean',
     'concurrent:test',
     'autoprefixer',
-    'karma:travis',
+    'karma',
     'coveralls'
   ]);
 
   grunt.registerTask('build', [
-    'clean:dist',
+    'clean',
     'bower-install',
     'useminPrepare',
     'concurrent:dist',
@@ -358,7 +355,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('gaedevrun', [
-    'clean:dist',
+    'clean',
     'bower-install',
     'copy:devrun',
     'gae:devrun',
